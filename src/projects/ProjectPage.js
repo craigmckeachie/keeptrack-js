@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useAuth } from '../account/useAuth';
 import { projectAPI } from './projectAPI';
 import ProjectDetail from './ProjectDetail';
@@ -7,8 +8,8 @@ function ProjectPage(props) {
   const [loading, setLoading] = useState(false);
   const [project, setProject] = useState(null);
   const [error, setError] = useState(null);
-  const id = Number(props.match.params.id);
-  // const id = 5;
+  const params = useParams();
+  const id = Number(params.id);
   const auth = useAuth();
 
   useEffect(() => {
