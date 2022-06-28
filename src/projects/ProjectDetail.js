@@ -5,7 +5,11 @@ export default function ProjectDetail({ project }) {
     <div className="row">
       <div className="col-sm-6">
         <div className="card large">
-          <img className="rounded" src={project.imageUrl} alt={project.name} />
+          <img
+            className="rounded"
+            src={'/' + project.imageUrl}
+            alt={project.name}
+          />
           <section className="section dark">
             <h3 className="strong">
               <strong>{project.name}</strong>

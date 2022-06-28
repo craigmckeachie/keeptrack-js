@@ -1,7 +1,6 @@
 import { Project } from './Project';
 
-const baseUrl = 'http://localhost:4000';
-const url = `${baseUrl}/projects`;
+const url = `${process.env.REACT_APP_API_URL}/projects`;
 
 function translateStatusToErrorMessage(status) {
   switch (status) {
@@ -42,13 +41,19 @@ function delay(ms) {
 }
 
 const projectAPI = {
-  find(id) {
-    return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
+  find(id, token) {
+    const requestInit = {
+      headers: { Authorization: 'Bearer ' + token },
+    };
+    return fetch(`${url}/${id}`, requestInit).then(checkStatus).then(parseJSON);
   },
 
-  get(page = 1, limit = 20) {
+  get(page = 1, limit = 20, token) {
+    const requestInit = {
+      headers: { Authorization: 'Bearer ' + token },
+    };
     return (
-      fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
+      fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`, requestInit)
         // .then(delay(600))
         .then(checkStatus)
         .then(parseJSON)
@@ -66,12 +71,13 @@ const projectAPI = {
     );
   },
 
-  put(project) {
+  put(project, token) {
     return fetch(`${url}/${project.id}`, {
       method: 'PUT',
       body: JSON.stringify(project),
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
       },
     })
       .then(checkStatus)

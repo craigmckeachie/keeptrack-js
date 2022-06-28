@@ -7,6 +7,8 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "json-server": "^0.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "mini.css": "^3.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -20,7 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api": "json-server api/db.json --port 4000"
+    "api": "json-server api/db.json --port 4000",
+    "api:auth": "node ./api/auth-api-server.js"
   },
   "eslintConfig": {
     "extends": [
