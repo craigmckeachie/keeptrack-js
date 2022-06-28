@@ -7,7 +7,7 @@ import {
   BrowserRouter as Router,
   Route,
   NavLink,
-  Switch,
+  Routes,
 } from 'react-router-dom';
 import HomePage from './home/HomePage';
 
@@ -27,11 +27,11 @@ function App() {
         </NavLink>
       </header>
       <div className="container">
-        <Switch>
-          <Route path="/" component={HomePage} />
-          <Route path="/projects" component={ProjectsPage} />
-          <Route path="/projects/:id" component={ProjectPage} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:id" element={<ProjectPage />} />
+        </Routes>
       </div>
     </Router>
   );
