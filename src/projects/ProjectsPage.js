@@ -1,41 +1,41 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ProjectList from './ProjectList';
-import { useSelector, useDispatch } from 'react-redux';
-import { loadProjects } from './state/projectActions';
+
+import { useProjects } from './projectHooks';
 
 function ProjectsPage() {
-  const loading = useSelector((appState) => appState.projectState.loading);
-  const projects = useSelector((appState) => appState.projectState.projects);
-  const error = useSelector((appState) => appState.projectState.error);
-  const currentPage = useSelector((appState) => appState.projectState.page);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadProjects(1));
-  }, [dispatch]);
+  const {
+    projects,
+    loading,
+    error,
+    setCurrentPage,
+    saveProject,
+    saving,
+    savingError,
+  } = useProjects();
 
   const handleMoreClick = () => {
-    dispatch(loadProjects(currentPage + 1));
+    setCurrentPage((currentPage) => currentPage + 1);
   };
 
   return (
     <>
       <h1>Projects</h1>
-
-      {error && (
+      {saving && <span className="toast">Saving...</span>}
+      {(error || savingError) && (
         <div className="row">
           <div className="card large error">
             <section>
               <p>
                 <span className="icon-alert inverse "></span>
-                {error}
+                {error} {savingError}
               </p>
             </section>
           </div>
         </div>
       )}
 
-      <ProjectList projects={projects} />
+      <ProjectList projects={projects} onSave={saveProject} />
 
       {!loading && !error && (
         <div className="row">
