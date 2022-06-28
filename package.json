@@ -5,7 +5,7 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/user-event": "^14.2.1",
     "json-server": "^0.17.0",
     "mini.css": "^3.0.1",
     "prop-types": "^15.8.1",
@@ -45,7 +45,11 @@
   },
   "devDependencies": {
     "@redux-devtools/extension": "^3.2.2",
+    "@types/redux-mock-store": "^1.0.3",
     "install": "^0.13.0",
-    "npm": "^8.13.1"
+    "msw": "^0.42.3",
+    "npm": "^8.13.1",
+    "react-test-renderer": "^18.2.0",
+    "redux-mock-store": "^1.5.4"
   }
 }
