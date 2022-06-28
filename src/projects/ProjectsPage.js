@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProjectList from './ProjectList';
 import { projectAPI } from './projectAPI';
 import { Project } from './Project';
+import ProjectListSkeleton from './ProjectListSkeleton';
 
 function ProjectsPage() {
   const [projects, setProjects] = useState([]);
@@ -76,12 +77,7 @@ function ProjectsPage() {
         </div>
       )}
 
-      {loading && (
-        <div className="center-page">
-          <span className="spinner primary"></span>
-          <p>Loading...</p>
-        </div>
-      )}
+      {loading && <ProjectListSkeleton />}
     </>
   );
 }
