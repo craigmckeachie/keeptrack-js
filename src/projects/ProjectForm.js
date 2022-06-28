@@ -72,9 +72,15 @@ function ProjectForm({ project: initialProject, onCancel }) {
   }
 
   return (
-    <form className="input-group vertical" onSubmit={handleSubmit}>
+    <form
+      aria-label="Edit a Project"
+      name="projectForm"
+      className="input-group vertical"
+      onSubmit={handleSubmit}
+    >
       <label htmlFor="name">Project Name</label>
       <input
+        id="name"
         type="text"
         name="name"
         placeholder="enter name"
@@ -82,25 +88,28 @@ function ProjectForm({ project: initialProject, onCancel }) {
         onChange={handleChange}
       />
       {errors.name.length > 0 && (
-        <div className="card error">
-          <p>{errors.name}</p>
+        <div role="alert" className="card error">
+          {errors.name}
         </div>
       )}
       <label htmlFor="description">Project Description</label>
       <textarea
+        id="description"
         name="description"
+        aria-label="project description"
         placeholder="enter description"
         value={project.description}
         onChange={handleChange}
       />
       {errors.description.length > 0 && (
-        <div className="card error">
+        <div role="alert" className="card error">
           <p>{errors.description}</p>
         </div>
       )}
 
       <label htmlFor="budget">Project Budget</label>
       <input
+        id="budget"
         type="number"
         name="budget"
         placeholder="enter budget"
@@ -108,12 +117,13 @@ function ProjectForm({ project: initialProject, onCancel }) {
         onChange={handleChange}
       />
       {errors.budget.length > 0 && (
-        <div className="card error">
+        <div role="alert" className="card error">
           <p>{errors.budget}</p>
         </div>
       )}
       <label htmlFor="isActive">Active?</label>
       <input
+        id="isActive"
         type="checkbox"
         name="isActive"
         checked={project.isActive}

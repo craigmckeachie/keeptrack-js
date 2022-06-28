@@ -1,7 +1,7 @@
 import { Project } from './Project';
 
 const baseUrl = 'http://localhost:4000';
-const url = `${baseUrl}/projects`;
+export const url = `${baseUrl}/projects`;
 
 function translateStatusToErrorMessage(status) {
   switch (status) {
@@ -49,7 +49,7 @@ const projectAPI = {
   get(page = 1, limit = 20) {
     return (
       fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
-        // .then(delay(600))
+        // .then(delay(2000))
         .then(checkStatus)
         .then(parseJSON)
         .then((projects) => {
@@ -59,9 +59,7 @@ const projectAPI = {
         })
         .catch((error) => {
           console.log('log client error ' + error);
-          throw new Error(
-            'There was an error retrieving the projects. Please try again.'
-          );
+          throw new Error(error.message);
         })
     );
   },
