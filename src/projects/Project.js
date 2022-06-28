@@ -8,9 +8,7 @@ export class Project {
     this.contractSignedOn = new Date();
     this.budget = 0;
     this.isActive = false;
-    this.isNew = () => {
-      return this.id === undefined;
-    };
+
     if (!initializer) return;
     if (initializer.id) this.id = initializer.id;
     if (initializer.name) this.name = initializer.name;
@@ -22,5 +20,9 @@ export class Project {
       this.contractSignedOn = initializer.contractSignedOn;
     if (initializer.budget) this.budget = initializer.budget;
     if (initializer.isActive) this.isActive = initializer.isActive;
+  }
+
+  isNew() {
+    return this.id === undefined;
   }
 }
