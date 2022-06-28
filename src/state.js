@@ -35,14 +35,16 @@
 // export const store = configureStore(initialAppState);
 
 import { configureStore } from '@reduxjs/toolkit';
-import { projectsSlice } from './projects/state/projectsSlice';
+// import { projectsSlice } from './projects/state/projectsSlice';
+import { projectAPI } from './projects/projectAPI';
 
 export const store = configureStore({
   reducer: {
-    projectState: projectsSlice.reducer,
+    // projectState: projectsSlice.reducer,
+    [projectAPI.reducerPath]: projectAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(projectAPI.middleware),
 });
