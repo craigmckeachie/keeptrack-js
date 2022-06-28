@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import ProjectList from './ProjectList';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadProjects } from './state/projectActions';
+import { loadProjects } from './state/projectsSlice';
 
 function ProjectsPage() {
   const loading = useSelector((appState) => appState.projectState.loading);
   const projects = useSelector((appState) => appState.projectState.projects);
-  const error = useSelector((appState) => appState.projectState.error);
+  const loadingError = useSelector(
+    (appState) => appState.projectState.loadingError
+  );
   const currentPage = useSelector((appState) => appState.projectState.page);
   const dispatch = useDispatch();
 
@@ -22,13 +24,13 @@ function ProjectsPage() {
     <>
       <h1>Projects</h1>
 
-      {error && (
+      {loadingError && (
         <div className="row">
           <div className="card large error">
             <section>
               <p>
                 <span className="icon-alert inverse "></span>
-                {error}
+                {loadingError}
               </p>
             </section>
           </div>
@@ -37,7 +39,7 @@ function ProjectsPage() {
 
       <ProjectList projects={projects} />
 
-      {!loading && !error && (
+      {!loading && !loadingError && (
         <div className="row">
           <div className="col-sm-12">
             <div className="button-group fluid">
