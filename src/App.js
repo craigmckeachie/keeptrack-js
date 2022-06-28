@@ -1,14 +1,15 @@
 import React from 'react';
+import './App.css';
+import ProjectsPage from './projects/ProjectsPage';
+import ProjectPage from './projects/ProjectPage';
+
 import {
   BrowserRouter as Router,
-  Routes,
   Route,
   NavLink,
+  Routes,
 } from 'react-router-dom';
-import ProjectsPage from './projects/ProjectsPage';
-import './App.css';
 import HomePage from './home/HomePage';
-import ProjectPage from './projects/ProjectPage';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <span className="icon-home"></span>
           Home
         </NavLink>
-        <NavLink to="/projects" className="button rounded">
+        <NavLink to="/projects/" className="button rounded">
           Projects
         </NavLink>
       </header>
