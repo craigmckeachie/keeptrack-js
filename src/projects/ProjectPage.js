@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { projectAPI } from './projectAPI';
 import ProjectDetail from './ProjectDetail';
 
@@ -7,8 +6,7 @@ function ProjectPage(props) {
   const [loading, setLoading] = useState(false);
   const [project, setProject] = useState(null);
   const [error, setError] = useState(null);
-  const params = useParams();
-  const id = Number(params.id);
+  const id = Number(props.match.params.id);
 
   useEffect(() => {
     setLoading(true);

@@ -17,3 +17,18 @@ body,
   justify-content: center;
   align-items: center;
 }
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 400ms ease-in;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
