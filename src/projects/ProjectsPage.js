@@ -4,57 +4,47 @@ import ProjectList from './ProjectList';
 import { useProjects } from './projectHooks';
 
 function ProjectsPage() {
-  const {
-    projects,
-    loading,
-    error,
-    setCurrentPage,
-    saveProject,
-    saving,
-    savingError,
-  } = useProjects();
-
-  const handleMoreClick = () => {
-    setCurrentPage((currentPage) => currentPage + 1);
-  };
+  const { data, isLoading, error, isFetching, page, setPage, isPreviousData } =
+    useProjects();
 
   return (
     <>
       <h1>Projects</h1>
-      {saving && <span className="toast">Saving...</span>}
-      {(error || savingError) && (
-        <div className="row">
-          <div className="card large error">
-            <section>
-              <p>
-                <span className="icon-alert inverse "></span>
-                {error} {savingError}
-              </p>
-            </section>
-          </div>
-        </div>
-      )}
-
-      <ProjectList projects={projects} onSave={saveProject} />
-
-      {!loading && !error && (
-        <div className="row">
-          <div className="col-sm-12">
-            <div className="button-group fluid">
-              <button className="button default" onClick={handleMoreClick}>
-                More...
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {loading && (
+      {isLoading && (
         <div className="center-page">
           <span className="spinner primary"></span>
           <p>Loading...</p>
         </div>
       )}
+      {isFetching && <span className="toast">Refreshing...</span>}
+      {error && (
+        <div className="row">
+          <div className="card large error">
+            <section>
+              <p>
+                <span className="icon-alert inverse "></span>
+                {error.message}
+              </p>
+            </section>
+          </div>
+        </div>
+      )}
+      {!isLoading && !error && <ProjectList projects={data} />}
+      <div>Current Page: {page + 1}</div>
+      <button
+        onClick={() => setPage((old) => Math.max(old - 1, 0))}
+        disabled={page === 0}
+      >
+        Previous Page
+      </button>{' '}
+      <button
+        onClick={() => {
+          setPage((old) => old + 1);
+        }}
+        disabled={isPreviousData}
+      >
+        Next Page
+      </button>
     </>
   );
 }

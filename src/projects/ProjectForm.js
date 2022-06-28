@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Project } from './Project';
+import { useSaveProject } from './projectHooks';
 
-function ProjectForm({ project: initialProject, onSave, onCancel }) {
+function ProjectForm({ project: initialProject, onCancel }) {
   const [project, setProject] = useState(initialProject);
   const [errors, setErrors] = useState({
     name: '',
     description: '',
     budget: '',
   });
+  const { mutate: saveProject, isLoading } = useSaveProject();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!isValid()) return;
-    onSave(project);
+    saveProject(project);
   };
 
   function handleChange(event) {
@@ -68,68 +71,71 @@ function ProjectForm({ project: initialProject, onSave, onCancel }) {
   }
 
   return (
-    <form className="input-group vertical" onSubmit={handleSubmit}>
-      <label htmlFor="name">Project Name</label>
-      <input
-        type="text"
-        name="name"
-        placeholder="enter name"
-        value={project.name}
-        onChange={handleChange}
-      />
-      {errors.name.length > 0 && (
-        <div className="card error">
-          <p>{errors.name}</p>
-        </div>
-      )}
-      <label htmlFor="description">Project Description</label>
-      <textarea
-        name="description"
-        placeholder="enter description"
-        value={project.description}
-        onChange={handleChange}
-      />
-      {errors.description.length > 0 && (
-        <div className="card error">
-          <p>{errors.description}</p>
-        </div>
-      )}
+    <>
+      {isLoading && <span className="toast">Saving...</span>}
 
-      <label htmlFor="budget">Project Budget</label>
-      <input
-        type="number"
-        name="budget"
-        placeholder="enter budget"
-        value={project.budget}
-        onChange={handleChange}
-      />
-      {errors.budget.length > 0 && (
-        <div className="card error">
-          <p>{errors.budget}</p>
+      <form className="input-group vertical" onSubmit={handleSubmit}>
+        <label htmlFor="name">Project Name</label>
+        <input
+          type="text"
+          name="name"
+          placeholder="enter name"
+          value={project.name}
+          onChange={handleChange}
+        />
+        {errors.name.length > 0 && (
+          <div className="card error">
+            <p>{errors.name}</p>
+          </div>
+        )}
+        <label htmlFor="description">Project Description</label>
+        <textarea
+          name="description"
+          placeholder="enter description"
+          value={project.description}
+          onChange={handleChange}
+        />
+        {errors.description.length > 0 && (
+          <div className="card error">
+            <p>{errors.description}</p>
+          </div>
+        )}
+
+        <label htmlFor="budget">Project Budget</label>
+        <input
+          type="number"
+          name="budget"
+          placeholder="enter budget"
+          value={project.budget}
+          onChange={handleChange}
+        />
+        {errors.budget.length > 0 && (
+          <div className="card error">
+            <p>{errors.budget}</p>
+          </div>
+        )}
+        <label htmlFor="isActive">Active?</label>
+        <input
+          type="checkbox"
+          name="isActive"
+          checked={project.isActive}
+          onChange={handleChange}
+        />
+        <div className="input-group">
+          <button className="primary bordered medium">Save</button>
+          <span />
+          <button type="button" className="bordered medium" onClick={onCancel}>
+            cancel
+          </button>
         </div>
-      )}
-      <label htmlFor="isActive">Active?</label>
-      <input
-        type="checkbox"
-        name="isActive"
-        checked={project.isActive}
-        onChange={handleChange}
-      />
-      <div className="input-group">
-        <button className="primary bordered medium">Save</button>
-        <span />
-        <button type="button" className="bordered medium" onClick={onCancel}>
-          cancel
-        </button>
-      </div>
-    </form>
+      </form>
+    </>
   );
 }
 
 ProjectForm.propTypes = {
   project: PropTypes.instanceOf(Project),
   onCancel: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
 };
 
 export default ProjectForm;
