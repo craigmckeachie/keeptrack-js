@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { projectAPI } from './projectAPI';
+import { useState } from "react";
+import { projectAPI } from "./projectAPI";
 
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export function useProjects() {
   const [page, setPage] = useState(0);
 
-  let queryInfo = useQuery(['projects', page], () => projectAPI.get(page + 1), {
+  let queryInfo = useQuery(["projects", page], () => projectAPI.get(page + 1), {
     keepPreviousData: true,
-    staleTime: 5000,
+    staleTime: 0,
   });
 
   return { ...queryInfo, page, setPage };
@@ -17,6 +17,6 @@ export function useProjects() {
 export function useSaveProject() {
   const queryClient = useQueryClient();
   return useMutation((project) => projectAPI.put(project), {
-    onSuccess: () => queryClient.invalidateQueries('projects'),
+    onSuccess: () => queryClient.invalidateQueries("projects"),
   });
 }
