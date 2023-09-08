@@ -1,7 +1,7 @@
-import React from 'react';
-import ProjectList from './ProjectList';
+import React from "react";
+import ProjectList from "./ProjectList";
 
-import { useProjects } from './projectHooks';
+import { useProjects } from "./projectHooks";
 
 function ProjectsPage() {
   const { data, isLoading, error, isFetching, page, setPage, isPreviousData } =
@@ -16,7 +16,7 @@ function ProjectsPage() {
           <p>Loading...</p>
         </div>
       )}
-      {isFetching && <span className="toast">Refreshing...</span>}
+      {isFetching && !isLoading && <span className="toast">Refreshing...</span>}
       {error && (
         <div className="row">
           <div className="card large error">
@@ -36,7 +36,7 @@ function ProjectsPage() {
         disabled={page === 0}
       >
         Previous Page
-      </button>{' '}
+      </button>{" "}
       <button
         onClick={() => {
           setPage((old) => old + 1);
