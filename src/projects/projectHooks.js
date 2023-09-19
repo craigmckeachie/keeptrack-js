@@ -19,6 +19,6 @@ export function useSaveProject() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (project) => projectAPI.put(project),
-    onSuccess: () => queryClient.invalidateQueries('projects'),
+    onSuccess: () => queryClient.invalidateQueries(['projects']),
   });
 }
