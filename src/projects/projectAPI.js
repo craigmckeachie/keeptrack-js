@@ -46,10 +46,10 @@ const projectAPI = {
     return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
   },
 
-  get(page = 1, limit = 20) {
+  get(page = 1, limit = 10) {
     return (
       fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
-        // .then(delay(600))
+        .then(delay(600))
         .then(checkStatus)
         .then(parseJSON)
         .then((projects) => {
