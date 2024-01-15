@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useProjects } from './projectHooks';
-import ProjectList from './ProjectList';
+import React from "react";
+import { useProjects } from "./projectHooks";
+import ProjectList from "./ProjectList";
 
 function ProjectsPage() {
-  const {
-    data,
-    isLoading,
-    error,
-    isError,
-    isFetching,
-    page,
-    setPage,
-    isPreviousData,
-  } = useProjects();
+  const { data, isLoading, error, isError, isFetching, page, setPage, isPreviousData } = useProjects();
 
   return (
     <>
@@ -20,19 +11,13 @@ function ProjectsPage() {
 
       {data ? (
         <>
-          {isFetching && !isLoading && (
-            <span className="toast">Refreshing...</span>
-          )}
+          {isFetching && !isLoading && <span className="toast">Refreshing...</span>}
           <ProjectList projects={data} />
           <div className="row">
             <div className="col-sm-4">Current page: {page + 1}</div>
             <div className="col-sm-4">
               <div className="button-group right">
-                <button
-                  className="button "
-                  onClick={() => setPage((oldPage) => oldPage - 1)}
-                  disabled={page === 0}
-                >
+                <button className="button " onClick={() => setPage((oldPage) => oldPage - 1)} disabled={page === 0}>
                   Previous
                 </button>
                 <button
@@ -42,7 +27,7 @@ function ProjectsPage() {
                       setPage((oldPage) => oldPage + 1);
                     }
                   }}
-                  disabled={data.length != 10}
+                  disabled={data.length !== 10}
                 >
                   Next
                 </button>
