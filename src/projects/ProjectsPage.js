@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import ProjectList from './ProjectList';
-import { projectAPI } from './projectAPI';
-import { Project } from './Project';
+import React, { useState, useEffect } from "react";
+import ProjectList from "./ProjectList";
+import { projectAPI } from "./projectAPI";
+import { Project } from "./Project";
 
 function ProjectsPage() {
   const [projects, setProjects] = useState([]);
@@ -65,14 +65,8 @@ function ProjectsPage() {
       <ProjectList projects={projects} onSave={saveProject} />
 
       {!loading && !error && (
-        <div className="row">
-          <div className="col-sm-12">
-            <div className="button-group fluid">
-              <button className="button default" onClick={handleMoreClick}>
-                More...
-              </button>
-            </div>
-          </div>
+        <div className="center">
+          <button className="large" onClick={handleMoreClick}>More...</button>
         </div>
       )}
 
