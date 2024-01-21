@@ -48,34 +48,37 @@ function ProjectsPage() {
   return (
     <>
       <h1>Projects</h1>
-
-      {error && (
-        <div className="row">
-          <div className="card large error">
-            <section>
-              <p>
-                <span className="icon-alert inverse "></span>
-                {error}
-              </p>
-            </section>
+      <section className="panel">
+        {error && (
+          <div className="row">
+            <div className="card large error">
+              <section>
+                <p>
+                  <span className="icon-alert inverse "></span>
+                  {error}
+                </p>
+              </section>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <ProjectList projects={projects} onSave={saveProject} />
+        <ProjectList projects={projects} onSave={saveProject} />
 
-      {!loading && !error && (
-        <div className="center">
-          <button className="large" onClick={handleMoreClick}>More...</button>
-        </div>
-      )}
+        {!loading && !error && (
+          <div className="center">
+            <button className="large" onClick={handleMoreClick}>
+              More...
+            </button>
+          </div>
+        )}
 
-      {loading && (
-        <div className="center-page">
-          <span className="spinner primary"></span>
-          <p>Loading...</p>
-        </div>
-      )}
+        {loading && (
+          <div className="center-page">
+            <span className="spinner primary"></span>
+            <p>Loading...</p>
+          </div>
+        )}
+      </section>
     </>
   );
 }

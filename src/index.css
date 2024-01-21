@@ -121,7 +121,6 @@ body {
   font-family: "Raleway", sans-serif;
   font-size: 1rem;
   color: #111827;
-
 }
 
 header {
@@ -131,9 +130,13 @@ header {
   /* background-color: #f5f8fc; */
 }
 
-main {
+.panel {
   background-color: #f5f5f5;
-    
+  padding-inline: 2rem;
+  padding-block: 2rem;
+  border-radius: .8rem;
+  max-width: max-content;
+  border: 1px solid #f5f5f5;
 }
 
 #logo-35 {
